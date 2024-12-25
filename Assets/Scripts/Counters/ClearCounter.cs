@@ -1,42 +1,57 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearCounter : BaseCounter {
-
+public class ClearCounter : BaseCounter
+{
 
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
-
-    public override void Interact(Player player) {
-        if (!HasKitchenObject()) {
-            // There is no KitchenObject here
-            if (player.HasKitchenObject()) {
-                // Player is carrying something
+    public override void Interact(Player player)
+    {
+        if (!HasKitchenObject())
+        {
+            // Không có KitchenObject nào ở đây
+            if (player.HasKitchenObject())
+            {
+                // Người chơi đang cầm một thứ gì đó
                 player.GetKitchenObject().SetKitchenObjectParent(this);
-            } else {
-                // Player not carrying anything
             }
-        } else {
-            // There is a KitchenObject here
-            if (player.HasKitchenObject()) {
-                // Player is carrying something
-                if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject)) {
-                    // Player is holding a Plate
-                    if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO())) {
+            else
+            {
+                // Người chơi không cầm gì cả
+            }
+        }
+        else
+        {
+            // Có một KitchenObject ở đây
+            if (player.HasKitchenObject())
+            {
+                // Người chơi đang cầm một thứ gì đó
+                if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
+                {
+                    // Người chơi đang cầm một cái đĩa
+                    if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO()))
+                    {
                         KitchenObject.DestroyKitchenObject(GetKitchenObject());
                     }
-                } else {
-                    // Player is not carrying Plate but something else
-                    if (GetKitchenObject().TryGetPlate(out plateKitchenObject)) {
-                        // Counter is holding a Plate
-                        if (plateKitchenObject.TryAddIngredient(player.GetKitchenObject().GetKitchenObjectSO())) {
+                }
+                else
+                {
+                    // Người chơi không cầm đĩa mà là thứ khác
+                    if (GetKitchenObject().TryGetPlate(out plateKitchenObject))
+                    {
+                        // Counter đang giữ một cái đĩa
+                        if (plateKitchenObject.TryAddIngredient(player.GetKitchenObject().GetKitchenObjectSO()))
+                        {
                             KitchenObject.DestroyKitchenObject(player.GetKitchenObject());
                         }
                     }
                 }
-            } else {
-                // Player is not carrying anything
+            }
+            else
+            {
+                // Người chơi không cầm gì cả
                 GetKitchenObject().SetKitchenObjectParent(player);
             }
         }
