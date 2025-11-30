@@ -10,6 +10,7 @@ public class LobbyUI : MonoBehaviour {
 
 
     [SerializeField] private Button mainMenuButton;
+
     [SerializeField] private Button createLobbyButton;
     [SerializeField] private Button quickJoinButton;
     [SerializeField] private Button joinCodeButton;
@@ -24,9 +25,6 @@ public class LobbyUI : MonoBehaviour {
         mainMenuButton.onClick.AddListener(() => {
             KitchenGameLobby.Instance.LeaveLobby();
             Loader.Load(Loader.Scene.MainMenuScene);
-        });
-        createLobbyButton.onClick.AddListener(() => {
-            lobbyCreateUI.Show();
         });
         quickJoinButton.onClick.AddListener(() => {
             KitchenGameLobby.Instance.QuickJoin();

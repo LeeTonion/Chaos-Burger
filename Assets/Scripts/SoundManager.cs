@@ -10,7 +10,7 @@ public class SoundManager : MonoBehaviour {
 
     public static SoundManager Instance { get; private set; }
 
-
+  
 
     [SerializeField] private AudioClipRefsSO audioClipRefsSO;
 

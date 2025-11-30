@@ -7,28 +7,26 @@ using UnityEngine.UI;
 public class LobbyCreateUI : MonoBehaviour {
 
 
-    [SerializeField] private Button closeButton;
-    [SerializeField] private Button createPublicButton;
-    [SerializeField] private Button createPrivateButton;
+
+
+    [SerializeField] private Button createLobby;
+
     [SerializeField] private TMP_InputField lobbyNameInputField;
+
+    [SerializeField] private UISwitcher.UISwitcher privateToggleSwitch;
 
 
 
     private void Awake() {
-        createPublicButton.onClick.AddListener(() => {
-            KitchenGameLobby.Instance.CreateLobby(lobbyNameInputField.text, false);
+        
+        createLobby.onClick.AddListener(() => {
+            KitchenGameLobby.Instance.CreateLobby(lobbyNameInputField.text, privateToggleSwitch.isOn);
         });
-        createPrivateButton.onClick.AddListener(() => {
-            KitchenGameLobby.Instance.CreateLobby(lobbyNameInputField.text, true);
-        });
-        closeButton.onClick.AddListener(() => {
-            Hide();
-        });
+
     }
 
-    private void Start() {
-        Hide();
-    }
+
+
 
     public void Show() {
         gameObject.SetActive(true);
