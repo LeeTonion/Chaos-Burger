@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GameInput : MonoBehaviour {
 
@@ -10,12 +11,16 @@ public class GameInput : MonoBehaviour {
 
     public static GameInput Instance { get; private set; }
 
-
+    public Joystick joystick;
 
     public event EventHandler OnInteractAction;
     public event EventHandler OnInteractAlternateAction;
     public event EventHandler OnPauseAction;
     public event EventHandler OnBindingRebind;
+
+
+    [SerializeField] private Button interactButton;
+    [SerializeField] private Button interactAlternateButton;
 
 
     public enum Binding {
@@ -48,6 +53,12 @@ public class GameInput : MonoBehaviour {
         playerInputActions.Player.Interact.performed += Interact_performed;
         playerInputActions.Player.InteractAlternate.performed += InteractAlternate_performed;
         playerInputActions.Player.Pause.performed += Pause_performed;
+
+        if (interactButton != null)
+            interactButton.onClick.AddListener(() => OnInteractAction?.Invoke(this, EventArgs.Empty));
+
+        if (interactAlternateButton != null)
+            interactAlternateButton.onClick.AddListener(() => OnInteractAlternateAction?.Invoke(this, EventArgs.Empty));
     }
 
     private void OnDestroy() {
@@ -70,13 +81,18 @@ public class GameInput : MonoBehaviour {
         OnInteractAction?.Invoke(this, EventArgs.Empty);
     }
 
-    public Vector2 GetMovementVectorNormalized() {
+    public Vector2 GetMovementVectorNormalized()
+    {
+#if UNITY_STANDALONE || UNITY_EDITOR
         Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
+        return inputVector.normalized;
 
-        inputVector = inputVector.normalized;
-
-        return inputVector;
+#elif UNITY_ANDROID || UNITY_IOS
+    return new Vector2(joystick.Horizontal, joystick.Vertical).normalized;
+#endif
     }
+
+
 
     public string GetBindingText(Binding binding) {
         switch (binding) {

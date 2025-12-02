@@ -9,6 +9,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent {
 
     public static event EventHandler OnAnyPlayerSpawned;
     public static event EventHandler OnAnyPickedSomething;
+   
 
 
     public static void ResetStaticData() {
@@ -99,8 +100,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent {
     }
 
     private void HandleInteractions() {
-        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
-
+        Vector2 inputVector = new Vector2(GameInput.Instance.joystick.Horizontal, GameInput.Instance.joystick.Vertical);
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
         if (moveDir != Vector3.zero) {
@@ -124,7 +124,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent {
     }
 
     private void HandleMovement() {
-        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
+        Vector2 inputVector = new Vector2(GameInput.Instance.joystick.Horizontal, GameInput.Instance.joystick.Vertical);
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
