@@ -21,6 +21,7 @@ public class GameInput : MonoBehaviour {
 
     [SerializeField] private Button interactButton;
     [SerializeField] private Button interactAlternateButton;
+    [SerializeField] private Button pauseBtn;
 
 
     public enum Binding {
@@ -54,11 +55,9 @@ public class GameInput : MonoBehaviour {
         playerInputActions.Player.InteractAlternate.performed += InteractAlternate_performed;
         playerInputActions.Player.Pause.performed += Pause_performed;
 
-        if (interactButton != null)
-            interactButton.onClick.AddListener(() => OnInteractAction?.Invoke(this, EventArgs.Empty));
-
-        if (interactAlternateButton != null)
-            interactAlternateButton.onClick.AddListener(() => OnInteractAlternateAction?.Invoke(this, EventArgs.Empty));
+        interactButton.onClick.AddListener(() => OnInteractAction?.Invoke(this, EventArgs.Empty));
+        interactAlternateButton.onClick.AddListener(() => OnInteractAlternateAction?.Invoke(this, EventArgs.Empty));
+        pauseBtn.onClick.AddListener(() => OnPauseAction?.Invoke(this, EventArgs.Empty));
     }
 
     private void OnDestroy() {
@@ -80,6 +79,11 @@ public class GameInput : MonoBehaviour {
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         OnInteractAction?.Invoke(this, EventArgs.Empty);
     }
+    public void TriggerInteractAction()
+    {
+        OnInteractAction?.Invoke(this, EventArgs.Empty);
+    }
+
 
     public Vector2 GetMovementVectorNormalized()
     {
