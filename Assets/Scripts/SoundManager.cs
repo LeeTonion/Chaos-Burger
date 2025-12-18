@@ -83,13 +83,9 @@ public class SoundManager : MonoBehaviour {
         PlaySound(audioClipRefsSO.warning, position);
     }
 
-    public void ChangeVolume() {
-        volume += .1f;
-        if (volume > 1f) {
-            volume = 0f;
-        }
+    public void ChangeVolume( int volume) {
 
-        PlayerPrefs.SetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, volume);
+        PlayerPrefs.SetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, volume*0.1f);
         PlayerPrefs.Save();
     }
 

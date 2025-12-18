@@ -13,27 +13,38 @@ public class LobbyCreateUI : MonoBehaviour {
 
     [SerializeField] private TMP_InputField lobbyNameInputField;
 
+    [SerializeField] private TMP_InputField lobbyTimeInputField;
+
     [SerializeField] private UISwitcher.UISwitcher privateToggleSwitch;
+
+    [SerializeField] private Slider MaxPlayersSlider;
+
+    private int MaxPlayers;
 
 
 
     private void Awake() {
-        
+        MaxPlayers = Mathf.RoundToInt(MaxPlayersSlider.value);
+        MaxPlayersSlider.onValueChanged.AddListener(MaxPlayersSliderChanged);
         createLobby.onClick.AddListener(() => {
-            KitchenGameLobby.Instance.CreateLobby(lobbyNameInputField.text, privateToggleSwitch.isOn);
+        int lobbyTime = int.Parse(lobbyTimeInputField.text); 
+        KitchenGameLobby.Instance.CreateLobby(lobbyNameInputField.text,privateToggleSwitch.isOn,MaxPlayers,lobbyTime);
         });
 
     }
 
-
-
+    private void MaxPlayersSliderChanged(float value)
+    {
+        MaxPlayers = Mathf.RoundToInt(value);
+    }
+    public void Hide() {
+        gameObject.SetActive(false);
+    }
 
     public void Show() {
         gameObject.SetActive(true);
     }
 
-    private void Hide() {
-        gameObject.SetActive(false);
-    }
+    
 
 }

@@ -34,7 +34,7 @@ public class KitchenGameManager : NetworkBehaviour {
     private bool isLocalPlayerReady;
     private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
     private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
-    private float gamePlayingTimerMax = 90f;
+    private float gamePlayingTimerMax ;
     private bool isLocalGamePaused = false;
     private NetworkVariable<bool> isGamePaused = new NetworkVariable<bool>(false);
     private Dictionary<ulong, bool> playerReadyDictionary;
@@ -44,7 +44,7 @@ public class KitchenGameManager : NetworkBehaviour {
 
     private void Awake() {
         Instance = this;
-
+        gamePlayingTimerMax = PlayerPrefs.GetInt("Time", 90);
         playerReadyDictionary = new Dictionary<ulong, bool>();
         playerPausedDictionary = new Dictionary<ulong, bool>();
     }

@@ -22,7 +22,7 @@ public class LobbyListSingleUI : MonoBehaviour {
 
     public void SetLobby(Lobby lobby) {
         this.lobby = lobby;
-        lobbyNameText.text = lobby.Name;
+         lobbyNameText.text = $"{lobby.Name} {lobby.Players.Count}/{KitchenGameMultiplayer.Instance.GetMaxPlayer()}";
     }
 
 }

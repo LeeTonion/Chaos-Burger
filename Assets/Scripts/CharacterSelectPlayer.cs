@@ -14,6 +14,13 @@ public class CharacterSelectPlayer : MonoBehaviour {
     [SerializeField] private Button kickButton;
     [SerializeField] private TextMeshPro playerNameText;
 
+    [SerializeField] private Animator animator;
+
+    private bool isOccupied = false;
+
+
+    
+
 
     private void Awake() {
         kickButton.onClick.AddListener(() => {
@@ -24,6 +31,8 @@ public class CharacterSelectPlayer : MonoBehaviour {
     }
 
     private void Start() {
+
+        Hide();
         KitchenGameMultiplayer.Instance.OnPlayerDataNetworkListChanged += KitchenGameMultiplayer_OnPlayerDataNetworkListChanged;
         CharacterSelectReady.Instance.OnReadyChanged += CharacterSelectReady_OnReadyChanged;
 
@@ -41,28 +50,52 @@ public class CharacterSelectPlayer : MonoBehaviour {
     }
 
     private void UpdatePlayer() {
-        if (KitchenGameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex)) {
+    bool hasPlayer = KitchenGameMultiplayer.Instance.IsPlayerIndexConnected(playerIndex);
+
+    if (hasPlayer) {
+
+ 
+        if (!isOccupied) {
             Show();
+        }
 
-            PlayerData playerData = KitchenGameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
+        isOccupied = true;
 
-            readyGameObject.SetActive(CharacterSelectReady.Instance.IsPlayerReady(playerData.clientId));
+        PlayerData playerData = KitchenGameMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
 
-            playerNameText.text = playerData.playerName.ToString();
+        readyGameObject.SetActive(CharacterSelectReady.Instance.IsPlayerReady(playerData.clientId));
+        playerNameText.text = playerData.playerName.ToString();
+        playerVisual.SetPlayerColor(
+            KitchenGameMultiplayer.Instance.GetPlayerColor(playerData.colorId)
+        );
 
-            playerVisual.SetPlayerColor(KitchenGameMultiplayer.Instance.GetPlayerColor(playerData.colorId));
-        } else {
+    } else {
+
+        if (isOccupied) {
             Hide();
         }
+
+        isOccupied = false;
     }
+}
+
 
     private void Show() {
-        gameObject.SetActive(true);
+        SetActiveRecursively(transform, true);
+        animator.SetTrigger("show");
+        
     }
 
     private void Hide() {
-        gameObject.SetActive(false);
+    SetActiveRecursively(transform, false);
+}
+
+private void SetActiveRecursively(Transform parent, bool state) {
+    foreach (Transform child in parent) {
+        child.gameObject.SetActive(state);
+        SetActiveRecursively(child, state);
     }
+}
 
     private void OnDestroy() {
         KitchenGameMultiplayer.Instance.OnPlayerDataNetworkListChanged -= KitchenGameMultiplayer_OnPlayerDataNetworkListChanged;

@@ -10,7 +10,6 @@ public class LobbyUI : MonoBehaviour {
 
 
     [SerializeField] private Button mainMenuButton;
-
     [SerializeField] private Button createLobbyButton;
     [SerializeField] private Button quickJoinButton;
     [SerializeField] private Button joinCodeButton;
@@ -19,6 +18,7 @@ public class LobbyUI : MonoBehaviour {
     [SerializeField] private LobbyCreateUI lobbyCreateUI;
     [SerializeField] private Transform lobbyContainer;
     [SerializeField] private Transform lobbyTemplate;
+    [SerializeField] private GameObject LobbyCreateUI;
 
 
     private void Awake() {
@@ -26,12 +26,16 @@ public class LobbyUI : MonoBehaviour {
             KitchenGameLobby.Instance.LeaveLobby();
             Loader.Load(Loader.Scene.MainMenuScene);
         });
+        createLobbyButton.onClick.AddListener(() => {
+            LobbyCreateUI.gameObject.SetActive(true);
+        });
         quickJoinButton.onClick.AddListener(() => {
             KitchenGameLobby.Instance.QuickJoin();
         });
         joinCodeButton.onClick.AddListener(() => {
             KitchenGameLobby.Instance.JoinWithCode(joinCodeInputField.text);
         });
+
 
         lobbyTemplate.gameObject.SetActive(false);
     }
@@ -64,7 +68,7 @@ public class LobbyUI : MonoBehaviour {
 
         foreach (Transform child in children)
         {
-            Destroy(child.gameObject); // Chỉ hủy khi đảm bảo đối tượng không null
+            Destroy(child.gameObject); 
         }
 
         foreach (Lobby lobby in lobbyList)

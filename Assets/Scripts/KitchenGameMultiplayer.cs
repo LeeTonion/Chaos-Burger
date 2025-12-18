@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class KitchenGameMultiplayer : NetworkBehaviour {
 
 
-    public const int MAX_PLAYER_AMOUNT = 4;
+    public  int MAX_PLAYER_AMOUNT ;
     private const string PLAYER_PREFS_PLAYER_NAME_MULTIPLAYER = "PlayerNameMultiplayer";
 
 
@@ -41,15 +41,25 @@ public class KitchenGameMultiplayer : NetworkBehaviour {
         playerDataNetworkList = new NetworkList<PlayerData>();
         playerDataNetworkList.OnListChanged += PlayerDataNetworkList_OnListChanged;
     }
+
+
     private void Start()
     {
         if (!playMultiplayer) 
         {
-            KitchenGameLobby.Instance.CreateLobby(" 1 player", false);
+            KitchenGameLobby.Instance.CreateLobby(" 1 player", false,1,100);
         }
     }
     public string GetPlayerName() {
         return playerName;
+    }
+    public void SetMaxPlayer(int Value)
+    {
+        MAX_PLAYER_AMOUNT = Value;
+    }
+    public int GetMaxPlayer()
+    {
+        return MAX_PLAYER_AMOUNT;
     }
 
     public void SetPlayerName(string playerName) {

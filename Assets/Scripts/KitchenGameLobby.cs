@@ -138,7 +138,7 @@ public class KitchenGameLobby : MonoBehaviour
     {
         try
         {
-            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(KitchenGameMultiplayer.MAX_PLAYER_AMOUNT - 1);
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(KitchenGameMultiplayer.Instance.GetMaxPlayer() - 1);
 
             return allocation;
         }
@@ -180,16 +180,18 @@ public class KitchenGameLobby : MonoBehaviour
     }
 
 
-    public async void CreateLobby(string lobbyName, bool isPrivate)
+    public async void CreateLobby(string lobbyName, bool isPrivate,int MaxPlayers,int Time)
     {
         OnCreateLobbyStarted?.Invoke(this, EventArgs.Empty);
         try
         {
-            joinedLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, KitchenGameMultiplayer.MAX_PLAYER_AMOUNT, new CreateLobbyOptions
+            joinedLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, MaxPlayers, new CreateLobbyOptions
             {
                 IsPrivate = isPrivate,
+                
             });
-
+            KitchenGameMultiplayer.Instance.SetMaxPlayer(MaxPlayers) ;
+            PlayerPrefs.SetInt("Time", Time);
             Allocation allocation = await AllocateRelay();
 
             string relayJoinCode = await GetRelayJoinCode(allocation);
