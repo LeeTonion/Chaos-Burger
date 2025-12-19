@@ -15,7 +15,7 @@ public class OptionsUI : MonoBehaviour {
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Button closeButton;
 
-    [SerializeField] private Transform pressToRebindKeyTransform;
+ 
 
 
     private Action onCloseButtonAction;
@@ -43,7 +43,6 @@ public class OptionsUI : MonoBehaviour {
     private void Start() {
         KitchenGameManager.Instance.OnLocalGameUnpaused += KitchenGameManager_OnGameUnpaused;
 
-        HidePressToRebindKey();
         Hide();
     }
 
@@ -67,21 +66,6 @@ public class OptionsUI : MonoBehaviour {
 
     private void Hide() {
         gameObject.SetActive(false);
-    }
-
-    private void ShowPressToRebindKey() {
-        pressToRebindKeyTransform.gameObject.SetActive(true);
-    }
-
-    private void HidePressToRebindKey() {
-        pressToRebindKeyTransform.gameObject.SetActive(false);
-    }
-
-    private void RebindBinding(GameInput.Binding binding) {
-        ShowPressToRebindKey();
-        GameInput.Instance.RebindBinding(binding, () => {
-            HidePressToRebindKey();
-        });
     }
 
 }
