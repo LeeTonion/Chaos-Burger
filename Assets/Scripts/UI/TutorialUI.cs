@@ -9,18 +9,14 @@ public class TutorialUI : MonoBehaviour {
 
 
    
-    [SerializeField] private TextMeshProUGUI keyInteractText;
-    [SerializeField] private TextMeshProUGUI keyInteractAlternateText;
-
     [SerializeField] private Button ContinueBtn;
 
 
 
     private void Start() {
-        GameInput.Instance.OnBindingRebind += GameInput_OnBindingRebind;
+ 
         KitchenGameManager.Instance.OnLocalPlayerReadyChanged += KitchenGameManager_OnLocalPlayerReadyChanged;
         ContinueBtn.onClick.AddListener(() => GameInput.Instance.TriggerInteractAction());
-        UpdateVisual();
 
         Show();
     }
@@ -31,14 +27,7 @@ public class TutorialUI : MonoBehaviour {
         }
     }
 
-    private void GameInput_OnBindingRebind(object sender, System.EventArgs e) {
-        UpdateVisual();
-    }
 
-    private void UpdateVisual() {
-        keyInteractText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Interact);
-        keyInteractAlternateText.text = GameInput.Instance.GetBindingText(GameInput.Binding.InteractAlternate);
-    }
 
     private void Show() {
         gameObject.SetActive(true);

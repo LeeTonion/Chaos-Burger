@@ -13032,7 +13032,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1693836840}
   - component: {fileID: 1693836841}
-  - component: {fileID: 1693836842}
   m_Layer: 5
   m_Name: HostDisconnectUI
   m_TagString: Untagged
@@ -13076,19 +13075,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playAgainButton: {fileID: 709216957}
---- !u!114 &1693836842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1693836839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31223096004d13147b759174d0e62bc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PopupDOTween
-  duration: 2
 --- !u!1 &1694684793
 GameObject:
   m_ObjectHideFlags: 0
@@ -13138,8 +13124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd1cb389fd48f7428f0787b34e8becd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyInteractText: {fileID: 0}
-  keyInteractAlternateText: {fileID: 0}
   ContinueBtn: {fileID: 1876218416}
 --- !u!1 &1703798855
 GameObject:
@@ -15650,7 +15634,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2101024261}
   - component: {fileID: 2101024262}
-  - component: {fileID: 2101024263}
   m_Layer: 5
   m_Name: GamePauseUI
   m_TagString: Untagged
@@ -15697,19 +15680,6 @@ MonoBehaviour:
   resumeButton: {fileID: 1728054279}
   mainMenuButton: {fileID: 1392365783}
   optionsButton: {fileID: 1349723024}
---- !u!114 &2101024263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2101024260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31223096004d13147b759174d0e62bc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PopupDOTween
-  duration: 2
 --- !u!1 &2101477528
 GameObject:
   m_ObjectHideFlags: 0
