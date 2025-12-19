@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -165,6 +165,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent {
         isWalking = moveDir != Vector3.zero;
 
         float rotateSpeed = 10f;
+        if(moveDir != Vector3.zero)
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
     }
 

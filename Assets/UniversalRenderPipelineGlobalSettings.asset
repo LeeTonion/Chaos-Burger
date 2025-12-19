@@ -65,7 +65,18 @@ MonoBehaviour:
       - rid: 5319685799123091456
       - rid: 5319685799123091457
     m_RuntimeSettings:
-      m_List: []
+      m_List:
+      - rid: 743981779039551488
+      - rid: 743981779039551489
+      - rid: 743981779039551490
+      - rid: 743981779039551498
+      - rid: 743981779039551499
+      - rid: 743981779039551501
+      - rid: 743981779039551502
+      - rid: 743981779039551503
+      - rid: 743981779039551505
+      - rid: 743981779039551510
+      - rid: 743981779039551512
   m_AssetVersion: 8
   m_ObsoleteDefaultVolumeProfile: {fileID: 0}
   m_RenderingLayerNames:
@@ -108,10 +119,6 @@ MonoBehaviour:
           type: 3}
         m_StencilDeferredPS: {fileID: 4800000, guid: e9155b26e1bc55942a41e518703fe304,
           type: 3}
-        m_ClusterDeferred: {fileID: 4800000, guid: 222cce62363a44a380c36bf03b392608,
-          type: 3}
-        m_StencilDitherMaskSeedPS: {fileID: 4800000, guid: 8c3ee818f2efa514c889881ccb2e95a2,
-          type: 3}
         m_DBufferClear: {fileID: 4800000, guid: f056d8bd2a1c7e44e9729144b4c70395,
           type: 3}
     - rid: 743981779039551489
@@ -139,6 +146,12 @@ MonoBehaviour:
         m_AutodeskInteractiveTransparent: {fileID: 4800000, guid: 5c81372d981403744adbdda4433c9c11,
           type: 3}
         m_AutodeskInteractiveMasked: {fileID: 4800000, guid: 80aa867ac363ac043847b06ad71604cd,
+          type: 3}
+        m_TerrainDetailLit: {fileID: 4800000, guid: f6783ab646d374f94b199774402a5144,
+          type: 3}
+        m_TerrainDetailGrassBillboard: {fileID: 4800000, guid: 29868e73b638e48ca99a19ea58c48d90,
+          type: 3}
+        m_TerrainDetailGrass: {fileID: 4800000, guid: e507fdfead5ca47e8b9a768b51c291a1,
           type: 3}
         m_DefaultSpeedTree7Shader: {fileID: 4800000, guid: 0f4122b9a743b744abe2fb6a0a88868b,
           type: 3}
