@@ -31,8 +31,13 @@ public static class Loader {
     }
 
     public static void LoadNetwork(Scene targetScene) {
+        WipeController.Instance.AnimateOut(() =>
+    {
         NetworkManager.Singleton.SceneManager.LoadScene(targetScene.ToString(), LoadSceneMode.Single);
+    });
     }
+
+    
 
     public static void LoaderCallback() {
         SceneManager.LoadScene(targetScene.ToString());
